@@ -1,0 +1,7 @@
+name             'rails_multi_vm'
+maintainer       'YOUR_NAME'
+maintainer_email 'YOUR_EMAIL'
+license          'All rights reserved'
+description      'Installs/Configures rails_multi_vm'
+long_description 'Installs/Configures rails_multi_vm'
+version          '0.1.0'
