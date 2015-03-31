@@ -13,3 +13,12 @@ suites:
     run_list:
       - 'recipe[rails_multi_vm::default]'
     attributes:
+  - name: database
+    run_list:
+      - 'recipe[rails_multi_vm::database]'
+    attributes:
+      postgresql:
+        password:
+          postgres: '5d30a314a0f9dce30170db5ba25fd195'
+      pg:
+        compile_time: 'false'
