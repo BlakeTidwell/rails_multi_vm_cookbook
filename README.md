@@ -39,4 +39,4 @@ Include `rails_multi_vm` in your node's `run_list`:
 
 ## License and Authors
 
-Author:: YOUR_NAME (<YOUR_EMAIL>)
+Author:: Blake Tidwell (<YOUR_EMAIL>)
