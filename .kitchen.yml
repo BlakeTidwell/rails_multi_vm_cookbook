@@ -17,8 +17,23 @@ suites:
     run_list:
       - 'recipe[rails_multi_vm::database]'
     attributes:
+      app:
+        database:
+          user: 'test'
+          password: 'test'
       postgresql:
+        pg_hba:
+          - type:   'host'
+            db:     'all'
+            user:   'postgres'
+            addr:   '127.0.0.1/32'
+            method: 'md5'
+          - type:   'host'
+            db:     'all'
+            user:   'test'
+            addr:   '127.0.0.1/32'
+            method: 'md5'
         password:
           postgres: '5d30a314a0f9dce30170db5ba25fd195'
-      pg:
-        compile_time: 'false'
+        config:
+          listen_addresses: '0.0.0.0'

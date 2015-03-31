@@ -20,3 +20,18 @@
 include_recipe "apt"
 include_recipe "postgresql::server"
 include_recipe "database::postgresql"
+
+connection_info = {
+  host:     '127.0.0.1',
+  port:     5432,
+  username: 'postgres',
+  password: node['postgresql']['password']['postgres']
+}
+
+postgresql_database_user node['app']['database']['user'] do
+  connection connection_info
+  password   node['app']['database']['password']
+  createdb   true
+  login      true
+  action     :create
+end
