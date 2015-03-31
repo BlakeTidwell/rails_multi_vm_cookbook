@@ -11,4 +11,5 @@ platforms:
 suites:
   - name: default
     run_list:
+      - 'recipe[rails_multi_vm::default]'
     attributes:
