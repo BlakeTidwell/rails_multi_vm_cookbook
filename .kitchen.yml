@@ -37,3 +37,13 @@ suites:
           postgres: '5d30a314a0f9dce30170db5ba25fd195'
         config:
           listen_addresses: '0.0.0.0'
+  - name: app
+    run_list:
+      - 'recipe[ruby_build]'
+      - 'recipe[rails_multi_vm::app]'
+    attributes:
+      rbenv:
+        rubies:
+          - 2.2.1
+      ruby_build:
+        upgrade: true
