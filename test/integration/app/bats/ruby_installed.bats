@@ -1,11 +1,11 @@
 #!/usr/bin/env bats
 
 @test "ruby is installed" {
-  run which ruby
-    [ "$status" -eq 0  ]
+  run sudo su - vagrant -c 'which ruby'
+  [ $status -eq 0 ]
 }
 
 @test "ruby version is correct" {
-  run ruby -v
-    [ "$status" == *"2.2.1"*  ]
+  run sudo su - vagrant -c 'ruby -v | grep 2.2.1'
+  [ $status -eq 0  ]
 }
