@@ -55,6 +55,7 @@ rbenv_script 'database' do
   code %{bundle exec rake db:create db:migrate db:seed}
 end
 
+# TODO: Factor out app user below, i.e. "vagrant".
 rbenv_script 'foreman export' do
   user 'root'
   rbenv_version node['rbenv']['global']
