@@ -1,6 +1,8 @@
 ---
 driver:
   name: vagrant
+  synced_folders:
+    - ["test/fixtures/rails_app", "/srv/app"]
 
 provisioner:
   name: chef_solo
@@ -42,6 +44,9 @@ suites:
       - 'recipe[ruby_build]'
       - 'recipe[rails_multi_vm::app]'
     attributes:
+      app:
+        name: 'app'
+        root: '/srv'
       rbenv:
         global: '2.2.1'
         rubies:

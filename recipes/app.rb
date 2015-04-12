@@ -41,3 +41,28 @@ end
 include_recipe "rbenv::system"
 include_recipe "rbenv::vagrant"
 
+app_directory = "#{node['app']['root']}/#{node['app']['name']}"
+
+rbenv_script 'bundle' do
+  rbenv_version node['rbenv']['global']
+  cwd app_directory
+  code %{bundle}
+end
+
+rbenv_script 'database' do
+  rbenv_version node['rbenv']['global']
+  cwd app_directory
+  code %{bundle exec rake db:create db:migrate db:seed}
+end
+
+rbenv_script 'foreman export' do
+  user 'root'
+  rbenv_version node['rbenv']['global']
+  cwd app_directory
+  code %{foreman export upstart /etc/init -u vagrant -t /tmp/upstart/foreman}
+end
+
+service node['app']['name'] do
+  action :restart
+end
+
