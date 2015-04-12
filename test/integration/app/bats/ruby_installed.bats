@@ -1,6 +1,6 @@
 #!/usr/bin/env bats
 
-RBENV_USER=vagrant
+load test_helper
 
 @test "ruby is installed" {
   run sudo su - $RBENV_USER -c 'which ruby'
