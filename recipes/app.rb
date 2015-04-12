@@ -41,5 +41,3 @@ end
 include_recipe "rbenv::system"
 include_recipe "rbenv::vagrant"
 
-rbenv_global node['rbenv']['rubies'][0] 
-

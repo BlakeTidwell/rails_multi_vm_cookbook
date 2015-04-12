@@ -43,7 +43,11 @@ suites:
       - 'recipe[rails_multi_vm::app]'
     attributes:
       rbenv:
+        global: '2.2.1'
         rubies:
-          - 2.2.1
+          - '2.2.1'
+        gems:
+          2.2.1:
+            - name: 'bundler'
       ruby_build:
         upgrade: true
