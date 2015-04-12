@@ -11,3 +11,4 @@ load test_helper
   run sudo su - $RBENV_USER -c 'ruby -v | grep 2.2.1'
   [ $status -eq 0  ]
 }
+

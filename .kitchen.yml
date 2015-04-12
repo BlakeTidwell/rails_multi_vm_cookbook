@@ -49,5 +49,6 @@ suites:
         gems:
           2.2.1:
             - name: 'bundler'
+            - name: 'foreman'
       ruby_build:
         upgrade: true
