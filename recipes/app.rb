@@ -67,3 +67,11 @@ service node['app']['name'] do
   action :restart
 end
 
+template '/etc/init/mailcatcher.conf' do
+  source 'upstart/mailcatcher.conf'
+end
+
+service 'mailcatcher' do
+  action :restart
+end
+

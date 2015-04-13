@@ -6,3 +6,8 @@ RBENV_USER=vagrant
   run sudo su - $RBENV_USER -c 'which bundle'
   [ $status -eq 0 ]
 }
+
+@test "mailcatcher is installed" {
+  run sudo su - $RBENV_USER -c 'which mailcatcher'
+  [ $status -eq 0 ]
+}

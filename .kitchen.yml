@@ -55,5 +55,6 @@ suites:
           2.2.1:
             - name: 'bundler'
             - name: 'foreman'
+            - name: 'mailcatcher'
       ruby_build:
         upgrade: true
