@@ -11,10 +11,6 @@ platforms:
   - name: ubuntu-12.04-amd64
 
 suites:
-  - name: default
-    run_list:
-      - 'recipe[rails_multi_vm::default]'
-    attributes:
   - name: database
     run_list:
       - 'recipe[rails_multi_vm::database]'
