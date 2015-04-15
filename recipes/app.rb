@@ -30,7 +30,7 @@ include_recipe "build-essential"
 
 %w(libffi-dev zlibc libgcrypt11
   libgcrypt11-dev zlib1g-dev
-  openssl libssl-dev).each do |pkg|
+  openssl libssl-dev nodejs).each do |pkg|
   package pkg
 end
 
