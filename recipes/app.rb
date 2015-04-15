@@ -55,6 +55,15 @@ rbenv_script 'database' do
   code %{bundle exec rake db:create db:migrate db:seed}
 end
 
+directory '/tmp/upstart/foreman' do
+  action :create
+  recursive true
+end
+
+template '/tmp/upstart/foreman/master.conf.erb' do
+  source 'upstart/foreman/master.conf.erb'
+end
+
 # TODO: Factor out app user below, i.e. "vagrant".
 rbenv_script 'foreman export' do
   user 'root'
