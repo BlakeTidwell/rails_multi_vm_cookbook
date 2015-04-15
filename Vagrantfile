@@ -11,8 +11,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # options are documented and commented below. For a complete reference,
   # please see the online documentation at vagrantup.com.
 
-  config.vm.hostname = 'rails-multi-vm-berkshelf'
-
   # Set the version of chef to install using the vagrant-omnibus plugin
   # NOTE: You will need to install the vagrant-omnibus plugin:
   #
@@ -27,6 +25,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # config.vm.box_url doesn't need to be specified.
   config.vm.box = 'ubuntu-12.04-amd64'
 
+  config.vm.synced_folder "test/fixtures/rails_app", "/srv/app"
 
   # Assign this VM to a host-only network IP, allowing you to access it
   # via the IP. Host-only networks can talk to the host machine as well as
@@ -46,6 +45,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   database_user = 'rails'
   config.vm.define :database do |db|
+    db.vm.hostname = 'database'
+
     db.vm.provision :chef_solo do |chef|
       chef.json = {
         app: {
@@ -82,6 +83,37 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
       chef.run_list = [
         'recipe[rails_multi_vm::database]'
+      ]
+    end
+  end
+
+  config.vm.define :app do |app|
+    app.vm.hostname = 'application'
+    app.vm.provision :chef_solo do |chef|
+      chef.json = {
+        app: {
+          name: 'app',
+          root: '/srv'
+        },
+        rbenv: {
+          global: '2.2.1',
+          rubies: ['2.2.1'],
+          gems: {
+            '2.2.1' => [
+              { name: 'bundler' },
+              { name: 'foreman' },
+              { name: 'mailcatcher' }
+            ]
+          }
+        },
+        ruby_build: {
+          upgrade: 'true'
+        }
+      }
+
+      chef.run_list = [
+        'recipe[ruby_build]',
+        'recipe[rails_multi_vm::app]'
       ]
     end
   end

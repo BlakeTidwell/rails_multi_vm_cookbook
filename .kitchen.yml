@@ -54,3 +54,4 @@ suites:
             - name: 'mailcatcher'
       ruby_build:
         upgrade: true
+
