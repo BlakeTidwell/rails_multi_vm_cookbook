@@ -41,7 +41,7 @@ end
 include_recipe "rbenv::system"
 include_recipe "rbenv::vagrant"
 
-app_directory = "#{node['app']['root']}/#{node['app']['name']}"
+app_directory = "/#{node['app']['root']}/#{node['app']['name']}"
 
 rbenv_script 'bundle' do
   rbenv_version node['rbenv']['global']
@@ -56,12 +56,19 @@ rbenv_script 'database' do
 end
 
 directory '/tmp/upstart/foreman' do
-  action :create
+  owner 'vagrant'
+  group 'root'
   recursive true
 end
 
-template '/tmp/upstart/foreman/master.conf.erb' do
-  source 'upstart/foreman/master.conf.erb'
+if node.attribute?('vagrant')
+  template '/tmp/upstart/foreman/vagrant.master.conf.erb' do
+    source 'upstart/foreman/master.conf.erb'
+  end
+else
+  template '/tmp/upstart/foreman/master.conf.erb' do
+    source 'upstart/foreman/master.conf.erb'
+  end
 end
 
 # TODO: Factor out app user below, i.e. "vagrant".
