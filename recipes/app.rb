@@ -21,6 +21,8 @@ include_recipe "apt"
 
 include_recipe "build-essential"
 
+include_recipe "postgresql::client"
+
 # Holy package nightmare
 # build-essential bison openssl libreadline6 libreadline6-dev curl
 # git-core
