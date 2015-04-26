@@ -1,14 +1,18 @@
 # -*- mode: ruby -*-
+#
 # vi: set ft=ruby :
 
 # Vagrantfile API/syntax version. Don't touch unless you know what you're doing!
 VAGRANTFILE_API_VERSION = '2'
 
-APP_ADDRESS = '192.168.50.1'
+# TODO: Investigate service discovery mechanisms. Harcoding these values
+# obviously melts down if there are any other devices using these IP addresses
+# locally. DHCP is probably preferable.
+APP_ADDRESS = '192.168.50.3'
 APP_DATABASE_ROLE = 'rails'
 APP_DATABASE_PASSWORD = 'rails'
 
-DATABASE_ADDRESS = '192.168.50.2'
+DATABASE_ADDRESS = '192.168.50.4'
 
 Vagrant.require_version '>= 1.5.0'
 
@@ -33,8 +37,8 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
 
   config.vm.synced_folder "test/fixtures/rails_app", "/srv/app"
 
-  # Enabling the Berkshelf plugin. To enable this globally, add this configuration
-  # option to your ~/.vagrant.d/Vagrantfile file
+  # Enabling the Berkshelf plugin. To enable this globally, add this
+  # configuration option to your ~/.vagrant.d/Vagrantfile file
   config.berkshelf.enabled = true
 
   config.vm.define :database do |db|
@@ -130,3 +134,4 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     end
   end
 end
+
